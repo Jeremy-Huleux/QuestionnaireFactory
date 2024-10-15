@@ -1,0 +1,69 @@
+﻿@model IEnumerable<QuestionnaireFactory.Entities.Candidat>
+
+@{
+    ViewData["Title"] = "";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Liste des Candidats</h1>
+</div>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>Email</th>
+            <th>Quizz</th>
+            <th>Niveau Quizz</th>
+            <th>État du Quizz</th>
+            <th>Détail Quizz</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var candidat in Model)
+        {
+            foreach (var quizz in candidat.Quizzs)
+            {
+                <tr>
+                    <td>@candidat.Nom</td>
+                    <td>@candidat.Prenom</td>
+                    <td>@candidat.Email</td>
+                    <td>@quizz.NomQuizz</td>
+                    <td>@quizz.NiveauQuizz?.Libelle</td>
+                    <td>
+                        @{
+                            var pointeur = quizz.PointArret;
+
+                            if (pointeur ==0)
+                            {
+
+                                <p>Terminé</p>
+
+                            }
+
+                            else if (pointeur == null)
+                            {
+
+                                <p>Non commencé </p>
+                            }
+
+                             else 
+                            {
+                                <p>Quizz arrêté à la question @pointeur</p>
+                            }
+
+                    }
+                    </td>
+
+                    <td>
+                        <a class="btn btn-primary" href="/Candidat/Index/@quizz.QuizzId">Détail du Quizz</a>
+                    
+                        <a class="btn btn-primary" href="/Candidat/Pdf/@quizz.QuizzId">Génération PDF des résultats</a>
+
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

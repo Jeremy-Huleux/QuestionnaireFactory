@@ -1,0 +1,54 @@
+# ASP.NET Core (.NET Framework)
+# Build and test ASP.NET Core projects targeting the full .NET Framework.
+# Add steps that publish symbols, save build artifacts, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
+
+trigger:
+  - main
+  - "*"
+
+pr:
+  - main
+  - "*"
+
+variables:
+  configuration: Release
+  isMain: $[eq(variables['Build.SourceBranch'], 'refs/heads/main')]
+
+pool:
+  name: 'self'
+
+steps:
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'build'
+    arguments: '--configuration $(configuration)'
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'test'
+    arguments: '--collect "Code coverage"'
+
+- task: DotNetCoreCLI@2
+  condition: eq(variables.isMain, true)
+  inputs:
+    command: 'publish'
+    arguments: '-o $(Build.ArtifactStagingDirectory) --configuration $(configuration)'
+    publishWebProjects: true
+
+- task: PublishBuildArtifacts@1
+  condition: eq(variables.isMain, true)
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'app'
+    publishLocation: 'Container'
+    
+- task: AzureRmWebAppDeployment@4
+  condition: eq(variables.isMain, true)
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'Abonnement Azure 1(c091cb4a-1f09-4f5c-a441-99b91e8bc438)'
+    appType: 'webApp'
+    WebAppName: 'ProjetDeMergeAppServices'
+    packageForLinux: '$(Build.ArtifactStagingDirectory)/*.zip'

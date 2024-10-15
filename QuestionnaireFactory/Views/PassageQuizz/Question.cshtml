@@ -1,0 +1,103 @@
+﻿@model QuestionnaireFactory.Models.PassageQuizz.QuestionViewModel
+
+@{
+    Layout = "~/Views/Shared/_LayoutSansHeader.cshtml";
+    ViewData["Title"] = "Question";
+}
+<link rel="stylesheet" href="~/css/PassageQuizz.css" />
+
+<h1>Questionnaire de recrutement</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-15">
+        <form asp-action="Question">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group"><br/>
+                @* <label asp-for="ContenuQuestion" class="control-label"></label>*@
+@*                 <input asp-for="ContenuQuestion" class="form-control" /> 
+                <span asp-validation-for="ContenuQuestion" class="text-danger"></span> *@
+                <h4>@Html.DisplayFor(model => model.ContenuQuestion)</h4><br/>
+            </div>
+            <input type="hidden" value="@Model.TypeQuestion" name="TypeQuestion" />
+             @if (Model.TypeQuestion == "Radio")
+            {
+                <div class="form-group">
+                    <table>
+                        @foreach (var item in Model.Reponses)
+                        {
+                            <tr>
+                                <td>
+                                    <input type="radio" asp-for="Reponses" value="@item.ReponseId" name="Reponse" id="Reponse_@item.ReponseId" />
+                                </td>
+                                <td>
+                                    <label for="Reponse_@item.ReponseId">@item.contenue</label>
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+            } 
+            else if (Model.TypeQuestion == "Checkbox")
+            {
+                <div class="form-group">
+                    <table >
+                        @for (int i = 0; i < Model.Reponses.Count; i++)
+                        {
+                            <tr>
+                                <td>
+                                    <input type="checkbox"
+                                           name="ReponsesCheckbox"
+                                           value="@Model.Reponses[i].ReponseId"
+                                           id="Reponse_@i"
+                                    @(Model.Reponses[i].estSelectionner == true ? "checked" : "") />
+                                </td>
+                                <td>
+                                    <label for="Reponse_@i">@Model.Reponses[i].contenue</label>
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+            }
+            else if(Model.TypeQuestion == "Libre")
+            {
+                <input type="text"
+                       name="ReponseLibre"
+                       class="ReponseLibre"
+                       id="Reponse_@Model.QuestionId"
+                       placeholder="Votre réponse ici... " />
+                
+            }
+            @if (Model.Commentaire == null)
+            {
+                <br/>
+                <br/>
+                <p></p>
+                <div class="form-group">
+                    <label class="control-label">Commentaire : </label>
+                    <input name="Commentaire" class="commentaire-input" type="text" id="Commentaire" placeholder="Votre commentaire ici..." />
+                </div>
+            }
+            else
+            {
+                <br />
+                <br />
+                <p></p>
+                <div class="form-group">
+                    <label class="control-label">Commentaire : </label>
+                    <input name="Commentaire" class="commentaire-input" type="text" id="Commentaire" placeholder="@Model.Commentaire" />
+                </div>
+            }
+            <br/>
+            <div class="form-group">
+                <input type="submit" value="Suivante" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

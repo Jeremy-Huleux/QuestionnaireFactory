@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>@ViewData["Title"] QuestionnaireFactory</title>
+	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+	<link rel="stylesheet" href="~/ProjetDeMerge.styles.css" asp-append-version="true" />
+</head>
+<body>
+	<header>
+		<nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom box-shadow mb-3">
+			<div class="container-fluid">
+				<div class="row w-100">
+					<div class="col-3 d-flex align-items-center">
+						<a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">QuestionnaireFactory</a>
+					</div>
+					<div class="col-6 d-flex justify-content-center align-items-center">
+						<ul class="navbar-nav">
+							<li class="nav-item">
+								<a class="nav-link btn btn-success text-white" asp-area="" asp-controller="Quizz" asp-action="Creation">Créer un Quizz</a>
+							</li>
+							<li class="nav-item ms-2">
+								<a class="nav-link btn btn-primary text-white" asp-area="" asp-controller="Home" asp-action="Index">Ajouter un Candidat</a>
+							</li>
+						</ul>
+					</div>
+					<div class="col-3 d-flex justify-content-end align-items-center">
+						<a class="nav-link btn btn-info text-white" asp-area="" asp-controller="Home" asp-action="Index">Agent 007</a>
+					</div>
+				</div>
+			</div>
+		</nav>
+	</header>
+
+
+	<div class="container">
+		<main role="main" class="pb-3">
+			@RenderBody()
+		</main>
+	</div>
+
+	<footer class="border-top footer text-muted mt-auto py-3">
+		<div class="container">
+			&copy; 2024 - QuestionnaireFactory - Jérémy - Yajuan - Antoine - Aline - <a asp-area="" asp-controller="Home" asp-action="Privacy">Copyright</a>
+		</div>
+	</footer>
+	<script src="~/lib/jquery/dist/jquery.min.js"></script>
+	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="~/js/site.js" asp-append-version="true"></script>
+	@await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

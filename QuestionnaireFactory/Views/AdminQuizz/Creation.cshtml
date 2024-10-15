@@ -1,0 +1,60 @@
+﻿@model QuestionnaireFactory.Models.CreationQuizz.CreationQuizzViewModel
+
+@{
+    ViewData["Title"] = "ViewCreationQuizz";
+}
+
+
+<h2>Formulaire pour créer un Quizz</h2>
+
+<hr />
+<div class="row">
+    <div class="col-md-5">
+        <form asp-action="Creation">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+            <div class="form-group">
+                <label asp-for="CandidatId" class="control-label"></label>
+                <select asp-for="CandidatId" class="form-control" asp-items="@Model.Candidats"></select>
+            </div>
+            <br />
+
+            <div class="form-group">
+                <label asp-for="TechnologieId" class="control-label"></label>
+                <select asp-for="TechnologieId" class="form-control" asp-items="@Model.Technologies"></select>
+            </div>
+
+            <br />
+            <div class="form-group">
+                <label asp-for="NiveauQuizzId" class="control-label"></label>
+                <select asp-for="NiveauQuizzId" class="form-control" asp-items="@Model.NiveauQuizzs"></select>
+            </div>
+
+            <br />
+            <div class="form-group">
+                <label asp-for="NombreQuestion" class="control-label"></label>
+                <input asp-for="NombreQuestion" class="form-control" />
+                <span asp-validation-for="NombreQuestion" class="text-danger"></span>
+            </div>
+
+            <br />
+            <div class="form-group">
+                <label asp-for="NombreQuestionLibre" class="control-label"></label>
+                <input asp-for="NombreQuestionLibre" class="form-control" />
+                <span asp-validation-for="NombreQuestionLibre" class="text-danger"></span>
+            </div>
+
+            <br />
+            <div class="form-group" asp-controller="AdminQuizzController" asp-action="ButtonAction" method="post">
+                <button type="submit">Créer un Quizz</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

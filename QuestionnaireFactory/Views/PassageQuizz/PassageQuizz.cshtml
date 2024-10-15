@@ -1,0 +1,39 @@
+﻿@model QuestionnaireFactory.Models.PassageQuizz.PassageQuizzViewModel
+
+@{
+    Layout = "~/Views/Shared/_LayoutSansHeader.cshtml";
+    ViewData["Title"] = "PassageQuizz";
+}
+<link rel="stylesheet" href="~/css/PassageQuizz.css" />
+
+<h1>Questionnaire de recrutement</h1><br/>
+<h2>Bonjour, <div id="prenom">@Model.Candidat.Nom @Model.Candidat.Prenom</di></h2>
+<br />
+<br />
+<h3>Vous avez un Quizz de niveau <div id="niveau">@Model.NiveauQuizz.Libelle</div></h3>
+<br />
+<br />
+
+
+<div id="bouton">
+    
+    @if(Model.PointArret.HasValue)
+    {
+        if(Model.PointArret.Value == 0)
+        {
+            <h4>Félicitation vous avez terminé le questionnaire de recrutement !</h4>
+        }
+        else{
+            <p>Vous avez été arrêté à la question<div id="arret"> @Model.PointArret</div></p>
+        }
+        <a class="btn btn-primary" href="@Url.Content("~/PassageQuizz/" + Model.CodeUrl + "/" + Model.PointArret)">Continuer le quizz</a> 
+
+        
+    }
+    else
+    {
+
+        <a class="btn btn-primary" href="@Url.Content("~/PassageQuizz/" + Model.CodeUrl + "/1")">Commencer le Quizz</a>
+    }
+    
+</div>

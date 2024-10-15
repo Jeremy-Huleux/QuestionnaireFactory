@@ -1,0 +1,66 @@
+﻿@model QuestionnaireFactory.Entities.Quizz
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Détails du Quizz</h1>
+
+
+<br />
+<div>
+    
+    <hr />
+    <dl class="row">
+        <br />
+        <dt class = "col-sm-2">
+        
+            Agent Id :
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.AgentId)
+        </dd>
+        
+        
+        <dt class = "col-sm-2">
+          Candidat Id :
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Candidat.CandidatId)
+        </dd>
+
+        <dt class="col-sm-2">
+           Nom du Candidat :
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Candidat.Prenom)  @Html.DisplayFor(model => model.Candidat.Nom)
+        </dd>
+        
+        <dt class="col-sm-2">
+            Niveau du Quizz :
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.NiveauQuizz.Libelle)
+        </dd>
+
+        <dt class="col-sm-2">
+            Email du Candidat :
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Candidat.Email)
+        </dd>
+
+        <dt class="col-sm-2">
+            Code URL du Quizz :
+        </dt>
+        <dd class="col-sm-10">
+            https://localhost:7027/PassageQuizz/@Html.DisplayFor(model => model.CodeUrl)
+        </dd>
+        
+        
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.QuizzId">Edit</a> |
+    <a asp-action="Index">Annuler</a>
+</div>

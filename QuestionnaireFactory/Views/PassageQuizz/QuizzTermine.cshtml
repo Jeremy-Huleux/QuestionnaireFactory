@@ -1,0 +1,18 @@
+﻿@model QuestionnaireFactory.Models.PassageQuizz.QuizzTermineViewModel
+@{
+    Layout = "~/Views/Shared/_LayoutSansHeader.cshtml";
+    ViewData["Title"] = "QuizzTermine";
+}
+<link rel="stylesheet" href="~/css/PassageQuizz.css" />
+
+
+<br />
+<h2>Félicitations, <div id="prenom">@Model.nomCandidat @Model.prenomCandidat</div></h2>
+<br />
+<h2>Vous avez terminé le questionnaire de recrutement</h2>
+<br />
+<h3>Vous avez eu un quizz de niveau <div id="niveau">@Model.niveauQuizz</div></h3>
+<br />
+<br />
+<h4>L'agent : <div id="prenom">@Model.agent</div> vous contactera très bientôt</h4>
+

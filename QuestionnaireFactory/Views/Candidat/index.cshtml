@@ -1,0 +1,87 @@
+﻿@model RestitutionViewModel
+
+@{
+	ViewData["Title"] = "Index";
+}
+<h1>Résultat du Candidat</h1>
+
+<div class="candidat-reponses info">
+	<div class="col-md-8">
+		<form asp-action="candidatreponsestockee"></form>
+		<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+		<div class="form-group">
+			Quizz créé par :
+			@Model.Quizz.AgentId
+			<br />
+			Nom du Quizz : @Model.Quizz.NomQuizz
+			<br />
+			Technologie du Quizz : @Model.Quizz.QuizzQuestionEnregistrees.FirstOrDefault()?.QuestionEnregistree.Technologie.Nom
+			<br />
+			Candidat :
+			@Model.Quizz.Candidat.Nom.ToUpper() @Model.Quizz.Candidat.Prenom
+			<br />
+			Mail candidat :
+			@Model.Quizz.Candidat.Email
+			<br />
+			<br />
+			@if (Model.Quizz.PointArret == 0)
+			{
+				<h2>Questions réussies :</h2>
+				<ul>
+					@foreach (var q in Model.ReponsesCorrectes)
+					{
+						<li>
+							@q.ContenuQuestion (@q.QuestionEnregistreeId)
+						</li>
+					}
+				</ul>
+				<h2>Questions échouées :</h2>
+				<ul>
+					@foreach (var q in Model.ReponsesIncorrectes)
+					{
+						<li>
+							@q.ContenuQuestion (@q.QuestionEnregistreeId)
+							<p><em>Explication :</em> @q.Explication</p>
+						</li>
+					}
+				</ul>
+			}
+			else
+			{
+				<p><strong>Le résultat du quizz n'est pas encore disponible.</strong></p>
+
+				<p><strong>Le candidat n'a pas fini de répondre au quizz.</strong></p>
+				<br />
+			}
+		</div>
+	</div>
+
+	<div>
+		<a asp-controller="Home" asp-action="Index">Retour à la liste des Candidats</a>
+	</div>
+	<br />
+
+	<div class="form-group">
+		<input type="button" id="showResults" value="Affichage des Résultats" class="btn btn-primary" @(Model.Quizz.PointArret != 0 ? "disabled='disabled'" : "") />
+		<input type="button" value="Valider les Résultats" class="btn btn-primary" onclick="window.location.href='@Url.Action("Index", "Home")'" />
+	</div>
+	<div id="score" style="display:none;">
+		<h3>Score du Candidat : <span id="scoreValue"></span>%</h3>
+	</div>
+
+	@section Scripts {
+		@{
+			await Html.RenderPartialAsync("_ValidationScriptsPartial");
+		}
+		@* affichage avec du JS *@
+		<script>
+			document.getElementById('showResults').addEventListener('click', function () {
+				var correctCount = @Model.ReponsesCorrectes.Count();
+				var totalCount = @Model.ReponsesCorrectes.Count() + @Model.ReponsesIncorrectes.Count();
+				var score = (correctCount / totalCount) * 100;
+				document.getElementById('scoreValue').innerText = score.toFixed(2);
+				document.getElementById('score').style.display = 'block';
+			});
+		</script>
+	}

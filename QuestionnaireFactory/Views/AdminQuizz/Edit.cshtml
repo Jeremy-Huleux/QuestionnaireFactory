@@ -1,0 +1,59 @@
+﻿@model QuestionnaireFactory.Entities.Quizz
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Quizz</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="QuizzId" />
+            <div class="form-group">
+                <label asp-for="AgentId" class="control-label"></label>
+                <input asp-for="AgentId" class="form-control" />
+                <span asp-validation-for="AgentId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CandidatId" class="control-label"></label>
+                <select asp-for="CandidatId" class="form-control" asp-items="ViewBag.CandidatId"></select>
+                <span asp-validation-for="CandidatId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NiveauQuizzId" class="control-label"></label>
+                <select asp-for="NiveauQuizzId" class="form-control" asp-items="ViewBag.NiveauQuizzId"></select>
+                <span asp-validation-for="NiveauQuizzId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CodeUrl" class="control-label"></label>
+                <input asp-for="CodeUrl" class="form-control" />
+                <span asp-validation-for="CodeUrl" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PointArret" class="control-label"></label>
+                <input asp-for="PointArret" class="form-control" />
+                <span asp-validation-for="PointArret" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NomQuizz" class="control-label"></label>
+                <input asp-for="NomQuizz" class="form-control" />
+                <span asp-validation-for="NomQuizz" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
