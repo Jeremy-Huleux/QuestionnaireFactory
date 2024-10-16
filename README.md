@@ -32,6 +32,7 @@ Notre base de données, construite avec **T-SQL**, a été conçue pour être mo
 - Relation entre les candidats et les quizz passés, permettant une traçabilité complète des résultats.
 - Système de gestion des accès et permissions pour les recruteurs.
 
+![Capture d'écran](https://github.com/Jeremy-Huleux/QuestionnaireFactory/blob/master/bdd.png?raw=true)
 
 ## Conclusion
 
