@@ -1,20 +1,38 @@
-# Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+# Questionnaire Factory
 
-# Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
-1.	Installation process
-2.	Software dependencies
-3.	Latest releases
-4.	API references
+Ce projet, développé dans le cadre de la formation POEC chez Ib Cegos, vise à créer une plateforme permettant la génération automatique de quizz ventilés pour le recrutement de développeurs. L’équipe était composée de **Jérémy Huleux**, **Antoine Martin**, **Yajuan Hu**, et **Aline Simo**. Voici un résumé des fonctionnalités que nous avons pu développer dans le temps imparti (2 semaines), sans crash notable.
 
-# Build and Test
-TODO: Describe and show how to build your code and run the tests. 
+## Fonctionnalités développées
 
-# Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
+### 1. Passage de quizz
+Nous avons complété la partie permettant aux candidats de passer des quizz. Cette section comprend les éléments suivants :
+- Sélection du niveau du quizz (Junior, Confirmé, Expérimenté) selon un système de ventilation prédéfini :
+  - Junior : 70% facile, 20% intermédiaire, 10% difficile.
+  - Confirmé : 25% facile, 50% intermédiaire, 25% difficile.
+  - Expérimenté : 10% facile, 40% intermédiaire, 50% difficile.
+- Interface utilisateur intuitive pour la présentation des questions.
+- Suivi du score en temps réel et affichage des résultats à la fin du quizz.
 
-If you want to learn more about creating good readme files then refer the following [guidelines](https://docs.microsoft.com/en-us/azure/devops/repos/git/create-a-readme?view=azure-devops). You can also seek inspiration from the below readme files:
-- [ASP.NET Core](https://github.com/aspnet/Home)
-- [Visual Studio Code](https://github.com/Microsoft/vscode)
-- [Chakra Core](https://github.com/Microsoft/ChakraCore)
+### 2. Vue recruteur
+La partie dédiée aux recruteurs a également été finalisée, avec les fonctionnalités suivantes :
+- Liste des candidats ayant passé les quizz, avec filtres selon les niveaux.
+- Visualisation des résultats détaillés des candidats.
+- Système de tri et de recherche pour faciliter la gestion des candidats.
+
+### 3. Génération de quizz automatique
+Nous avons développé un système de génération automatique de quizz ventilés, basé sur un ensemble de critères définis par les recruteurs :
+- Génération dynamique de questions selon le niveau choisi (Junior, Confirmé, Expérimenté).
+- Gestion de la ventilation des questions pour garantir une difficulté cohérente selon le profil recherché.
+- Optimisation des temps de génération des quizz.
+
+### 4. Base de données
+Notre base de données, construite avec **T-SQL**, a été conçue pour être modulaire et évolutive. Elle inclut :
+- Tables pour stocker les informations des utilisateurs, recruteurs et candidats.
+- Tables pour les questions de quizz, ventilées par niveau de difficulté.
+- Relation entre les candidats et les quizz passés, permettant une traçabilité complète des résultats.
+- Système de gestion des accès et permissions pour les recruteurs.
+
+
+## Conclusion
+
+Le projet **Questionnaire Factory** nous a permis de développer un système robuste et performant pour la gestion des quizz de recrutement. En deux semaines, nous avons réussi à implémenter les fonctionnalités clés sans rencontrer de crash, tout en respectant les contraintes de temps et les exigences du client.
